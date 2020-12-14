@@ -3,32 +3,6 @@ const bcrypt = require('bcryptjs')
 const Customer = require('../models/Customer');
 
 module.exports = {
-    async signup(req, res) {
-        // get fields from body request
-        const { name, email, password } = req.body;
-
-        try {
-            // check if email already exists
-            if (await Customer.findOne({ email })) {
-                return res.status(400).send({ error: 'User already exists' })
-            }
-
-            // add new customer
-            const newCustomer = await Customer.create({
-                name,
-                email,
-                password
-            });
-            
-            // undefined to not show the password on the response
-            newCustomer.password = undefined;
-
-            return res.send(newCustomer)
-            
-        } catch(err) {
-            res.status(400).send({error: 'Error to register'})
-        }
-    },
 
     async getCustomer(req, res){
         // get id customer from request params
