@@ -1,14 +1,19 @@
 // API routes file
 const express = require('express');
-const CustomersController = require('./controllers/CustomersController');
+const CustomerController = require('./controllers/CustomerController');
+const AuthController = require('./controllers/AuthController');
 
 const routes = express.Router();
 
 routes.get('/', (req, res) => res.send('Produtos Favoritos API'))
-routes.post('/api/customer/signup', CustomersController.signup);
 
-routes.get('/api/customer/:customerId', CustomersController.getCustomer);
-routes.put('/api/customer/:customerId', CustomersController.updateCustomer);
-routes.delete('/api/customer/:customerId', CustomersController.deleteCustomer);
+// auth routes
+routes.post('/api/customer/signup', AuthController.signup);
+routes.post('/api/customer/login', AuthController.login);
+
+// customer routes
+routes.get('/api/customer/:customerId', CustomerController.getCustomer);
+routes.put('/api/customer/:customerId', CustomerController.updateCustomer);
+routes.delete('/api/customer/:customerId', CustomerController.deleteCustomer);
 
 module.exports = routes;

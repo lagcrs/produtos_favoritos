@@ -1,3 +1,7 @@
+// require global dotenv and database config
+require('dotenv').config();
+require('./database');
+
 const express = require('express');
 const cors = require('cors');
 const server = express();
