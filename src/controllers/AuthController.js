@@ -49,7 +49,7 @@ module.exports = {
         user.password = undefined;
 
         res.send({
-            user,
+            user: user.email,
             // generate token
             token: jwt.sign({ id: user.id }, authConfig.secret, {
                 expiresIn: authConfig.expiresIn
