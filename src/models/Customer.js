@@ -16,7 +16,8 @@ const CustomerSchema = new Schema({
         type: String,
         require: true,
         select: false
-    }
+    },
+    favoriteProducts: []
 }, {
     timestamps: true
 });
