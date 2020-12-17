@@ -5,12 +5,18 @@ const Customer = require('../models/Customer');
 module.exports = {
 
     async getCustomer(req, res){
-        // get id customer from request params
+        // get id customer from request params and user id from request
         const { customerId } = req.params;
+        const userId = req.userId;
 
         try {
             // find by id the customer from req
             const customer = await Customer.findById(customerId);
+
+            // verify if customerId is the userId logged. The user logged can only see yourself
+            if(customerId !== userId){ 
+                return res.status(401).send({error: 'Not Authorized.' });
+            }
 
             // return success massage
             return res.status(200).send({ message: 'Customer fetched.', customer:  customer})
@@ -23,11 +29,17 @@ module.exports = {
     async updateCustomer(req, res) {
         // get fields from request
         const { customerId } = req.params;
+        const userId = req.userId;
         const { name, email, password } = req.body;
 
         try {
             // find by id the customer with your password selected
-            const customer = await Customer.findById(customerId).select('+password')
+            const customer = await Customer.findById(customerId).select('+password');
+
+            // verify if customerId is the userId logged. The user logged can only see yourself
+            if(customerId !== userId){ 
+                return res.status(401).send({error: 'Not Authorized.' });
+            }
 
             // update fields name and email
             customer.name = name;
@@ -53,8 +65,15 @@ module.exports = {
     async deleteCustomer(req, res) {
         // get customerId from request
         const { customerId }  = req.params;
+        const userId = req.userId;
 
         try {
+
+            // verify if customerId is the userId logged. The user logged can only see yourself
+            if(customerId !== userId){ 
+                return res.status(401).send({error: 'Not Authorized.' });
+            }
+
             // find by id the customer and delete
             await Customer.findByIdAndDelete(customerId);
 
