@@ -58,7 +58,8 @@ $ npm run dev
 ```
 > Foi utilizado o MongoDB Atlas para a criação do banco de dados, então para fins de testes da API não é necessário configurar o banco de dados (está na nuvem).
 
-*Não esqueça que precisa fazer login para utilizar a API! Então cadastra um usuário, faça o login para que as rotas sejam liberadas para você.*
+- Não esqueça que precisa fazer login para utilizar a API! Então cadastra um usuário, faça o login para que as rotas sejam liberadas para você.
+- Caso queira utilizar as informações geradas no `.env.example`, apenas copie e cole em um arquivo `.env`. Não é uma boa prática, mas é para fins de testes da API.
 
 ## Contato
 
