@@ -12,23 +12,22 @@ module.exports = {
         try {
             // check if email already exists
             if (await Customer.findOne({ email })) {
-                return res.status(400).send({ error: 'User already exists' })
+                return res.status(400).send({ error: 'User already exists.' })
             }
 
             // add new customer
-            const newCustomer = await Customer.create({
+            await Customer.create({
                 name,
                 email,
                 password
             });
-            
-            // undefined to not show the password on the response
-            newCustomer.password = undefined;
 
-            return res.send(newCustomer)
+            // return success massage
+            return res.status(201).send({ message: 'User created successfully!' })
             
-        } catch(err) {
-            res.status(400).send({error: 'Error to register'})
+        } catch(error) {
+            // return message error if falid to add product
+            res.status(400).send({error: 'Error to register.'})
         }
     },
 
@@ -40,19 +39,25 @@ module.exports = {
         const user = await Customer.findOne( { email } ).select('+password');
 
         // verify with user exists
-        if(!user) return res.status(401).send({ error: 'User not found' });
+        if(!user) {
+            return res.status(401).send({ error: 'User not found.' });
+        }
 
         // compare req.body password with hash password of database using bcrypt, if invalid return 401 status
-        if(!await bcrypt.compare(password, user.password)) return res.status(401).send({ error: 'Invalid password' });
+        if(!await bcrypt.compare(password, user.password)){ 
+            return res.status(401).send({ error: 'Invalid password.' });
+        }
 
-        // undefined to not show the password on the response
-        user.password = undefined;
-
+        // return success massage with token
         res.send({
-            user: user.email,
+            // return name and email of user
+            name: user.name,
+            email: user.email,
+            
             // generate token
-            token: jwt.sign({ id: user.id }, authConfig.secret, {
-                expiresIn: authConfig.expiresIn
+            token: jwt.sign({ id: user.id }, authConfig.privateKey, {
+                expiresIn: authConfig.expiresIn,
+                algorithm: authConfig.algorithm
             })
         });
     }

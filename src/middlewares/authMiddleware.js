@@ -1,4 +1,4 @@
-// middleware auth file - authorization
+// middleware auth file 
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth')
 
@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
     let tokenDecoded;
     try {
         // verify if token is valid
-        tokenDecoded = jwt.verify(token, authConfig.secret);
+        tokenDecoded = jwt.verify(token, authConfig.publicKey);
 
     } catch(err) {
         return res.status(500).send({ error: 'Invalid Token' })
