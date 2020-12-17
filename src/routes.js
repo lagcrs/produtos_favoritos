@@ -19,7 +19,7 @@ routes.post('/api/customer/login', AuthController.login);
 
 // list of favorite products
 routes.get('/api/customer/favorites/', authMiddleware, FavoriteProducts.getList);
-routes.get('/api/customer/favorites/:productId', authMiddleware, FavoriteProducts.addProduct);
+routes.post('/api/customer/favorites/:productId', authMiddleware, FavoriteProducts.addProduct);
 
 // customer routes
 routes.get('/api/customer/:customerId', authMiddleware, CustomerController.getCustomer);
