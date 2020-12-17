@@ -1,4 +1,4 @@
-// List of Favorite Products
+// List of Favorite Products Controller file
 const axios = require('axios')
 const Customer = require('../models/Customer');
 
@@ -13,7 +13,7 @@ module.exports = {
             // return list of favorite products
             return res.status(200).send({ listFavoriteProducts: user.favoriteProducts })
 
-        }catch(err){
+        }catch(error){
             // return message error if falid to get list
             return res.status(500).send({ error: 'Falid to get list.' })
         }
@@ -49,9 +49,9 @@ module.exports = {
             // return success massage
             return res.status(201).send({ message: 'Product add successfully!' })
 
-        } catch(err) {
+        } catch(error) {
             // return message error if falid to add product
-            return res.status(500).send({ error: 'Falid to add product' })
+            return res.status(500).send({ error: 'Falid to add product.' })
         }
     }
 }

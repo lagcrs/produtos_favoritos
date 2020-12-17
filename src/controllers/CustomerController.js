@@ -12,9 +12,10 @@ module.exports = {
             // find by id the customer from req
             const customer = await Customer.findById(customerId);
 
-            return res.status(200).send({ message: 'Customer fetched', customer:  customer})
+            // return success massage
+            return res.status(200).send({ message: 'Customer fetched.', customer:  customer})
 
-        } catch (err) {
+        } catch (error) {
             res.status(500).send({error: 'Failed to get customer.'})
         }
     },
@@ -40,23 +41,28 @@ module.exports = {
             //save all the fields updated
             await customer.save();
 
+            // return success massage
             return res.status(200).send({ message: 'Customer update!'});
 
-        } catch(err) {
+        } catch(error) {
+            // return message error if falid to update customer
             res.status(500).send({error: 'Failed to update customer.'})
         }
     },
 
     async deleteCustomer(req, res) {
+        // get customerId from request
         const { customerId }  = req.params;
 
         try {
             // find by id the customer and delete
             await Customer.findByIdAndDelete(customerId);
 
+            // return success massage
             return res.status(200).send({ message: 'Customer deleted.' })
 
-        } catch(err) {
+        } catch(error) {
+            // return message error if falid to update customer
            res.status(500).send({error: 'Failed to delete customer.'})
         }
     }

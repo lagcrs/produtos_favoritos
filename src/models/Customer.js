@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
+
+// bcrypt for generate hash password
 const bcrypt = require('bcryptjs');
 
+// Customer Schema
 const CustomerSchema = new Schema({
     name: {
         type: String,
