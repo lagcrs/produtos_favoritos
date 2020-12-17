@@ -16,14 +16,17 @@ module.exports = {
             }
 
             // add new customer
-            await Customer.create({
+            const newCustomer = await Customer.create({
                 name,
                 email,
                 password
             });
 
+            // pass password to undefined for response
+            newCustomer.password = undefined;
+
             // return success massage
-            return res.status(201).send({ message: 'User created successfully!' })
+            return res.status(201).send({ message: 'User created successfully!', user: newCustomer })
             
         } catch(error) {
             // return message error if falid to add product
