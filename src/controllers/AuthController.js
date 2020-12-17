@@ -30,7 +30,7 @@ module.exports = {
             
         } catch(error) {
             // return message error if falid to add product
-            res.status(400).send({error: 'Error to register.'})
+            res.status(500).send({error: 'Error to register.'})
         }
     },
 
