@@ -56,7 +56,7 @@ $ npm run dev
 
 # A aplicação será aberta na porta:3333 - acesse http://localhost:3333 (recomendo acessar pelo Insomnia ou Postman)
 ```
-> Foi utilizado o MongoDB Atlas para a criação do banco de dados, então para fins de testes da API não é necessário configurar o banco de dados.
+> Foi utilizado o MongoDB Atlas para a criação do banco de dados, então para fins de testes da API não é necessário configurar o banco de dados (está na nuvem).
 
 *Não esqueça que precisa fazer login para utilizar a API! Então cadastra um usuário, faça o login para que as rotas sejam liberadas para você.*
 
